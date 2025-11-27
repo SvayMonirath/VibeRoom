@@ -15,6 +15,9 @@ class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), unique=True, nullable=False)
     description = db.Column(db.String(255), nullable=True)
+    is_private = db.Column(db.Boolean, default=False, nullable=False)
+    genre = db.Column(db.String(50), nullable=True)
+    password = db.Column(db.String(100), nullable=True)
 
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
