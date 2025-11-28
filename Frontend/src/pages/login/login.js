@@ -42,12 +42,9 @@ form.addEventListener('submit', async(e) => {
             localStorage.setItem('accessToken', data.accessToken);
 
             setTimeout(() => {
-                generalError.classList.add('hidden');
-            }, 6000);
+                window.location.href = '../Main/main.html';
+            }, 1000);
 
-            // setTimeout(() => {
-            //     window.location.href = '/pages/home/home.html'; // Adjust the redirect path as needed
-            // }, 1000);
         }
     } catch (err) {
         console.error('Error:', err);
