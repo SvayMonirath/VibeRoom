@@ -33,18 +33,8 @@ form.addEventListener('submit', async(e) => {
             generalError.textContent = data.message || 'Login failed';
             generalError.classList.remove('hidden');
         } else {
-            generalError.textContent = data.message || 'Login successful!';
-            generalError.classList.remove('hidden');
-            generalError.classList.remove('text-red-400');
-            generalError.classList.add('text-green-400');
-
-
             localStorage.setItem('accessToken', data.accessToken);
-
-            setTimeout(() => {
-                window.location.href = '../Main/main.html';
-            }, 1000);
-
+            window.location.href = '../Main/main.html';
         }
     } catch (err) {
         console.error('Error:', err);

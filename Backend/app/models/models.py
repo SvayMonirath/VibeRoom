@@ -34,7 +34,7 @@ class Music(db.Model):
     album = db.Column(db.String(100), nullable=True)
     genre = db.Column(db.String(50), nullable=True)
     audio_file_path = db.Column(db.String(500), nullable=False)
-    cover_image_path = db.Column(db.String(500), nullable=True)
+    cover_image_path = db.Column(db.String(500), nullable=False)
 
 # -------------------- Association Table --------------------
 class RoomMusicAssociation(db.Model):
