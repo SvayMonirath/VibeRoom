@@ -98,8 +98,8 @@ function displaySongs(songs) {
 
     songs.forEach(song => {
         const songDiv = document.createElement('div');
-        songDiv.className =
-            "music-container relative flex flex-col items-center gap-4 p-3 bg-white/5 rounded-lg cursor-pointer sm:flex-col xl:flex-col 2xl:flex-row hover:bg-white/10 transition duration-300 group";
+        songDiv.className = "music-container relative flex flex-col items-center gap-4 p-3 bg-white/5 rounded-lg cursor-pointer hover:bg-white/10 transition duration-300 group overflow-hidden shadow-lg";
+
 
         songDiv.innerHTML = `
             <!-- Cover + Text -->
@@ -110,9 +110,9 @@ function displaySongs(songs) {
                     class="rounded-md transition duration-300 group-hover:blur-sm group-hover:brightness-50" />
 
                 <!-- Text -->
-                <div class="mt-2 text-center transition duration-300 group-hover:blur-sm group-hover:opacity-40">
-                    <div class="text-white font-medium text-2xl">${song.title}</div>
-                    <div class="text-white font-extralight">${song.artist}</div>
+                <div class="mt-2 text-start transition duration-300 group-hover:blur-sm group-hover:opacity-40">
+                    <div class="text-white font-medium text-xl md:text-2xl">${song.title}</div>
+                    <div class="text-white font-extralight text-sm md:text-base">${song.artist}</div>
                 </div>
             </div>
 

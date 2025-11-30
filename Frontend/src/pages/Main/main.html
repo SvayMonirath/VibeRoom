@@ -168,22 +168,21 @@
     </nav>
 
     <section class="pt-24 p-32">
-        <div class="text-white font-[Poppins] text-4xl font-medium gap-6 flex items-center">Welcome <span class="bg-gradient-to-r from-white to-purple-950 bg-clip-text text-transparent text-7xl" id="usernameDisplay"></span> </div>
+        <div class="text-white font-[Poppins] text-4xl font-medium gap-6 flex items-center">Welcome <span class="bg-gradient-to-r from-white to-purple-950 bg-clip-text text-transparent text-5xl sm:text-5xl md:text-6xl lg:text-7xl" id="usernameDisplay"></span> </div>
 
         <div class="text-white/30 text-xl">Ready to vibe with music?</div>
 
-        <div id="song-container" class=" grid grid-cols-4 gap-4 mt-10
+        <div id="song-container" class=" grid gap-4 mt-10
             sm:grid-cols-2
             md:grid-cols-3
             lg:grid-cols-4
-            xl:grid-cols-4
         "></div>
 
         <!-- Active Rooms -->
         <div class="flex flex-row">
             <div class="mt-10 flex gap-2 items-center text-white/80 text-3xl font-medium w-1/2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="indigo" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-radio-icon lucide-radio"><path d="M16.247 7.761a6 6 0 0 1 0 8.478"/><path d="M19.075 4.933a10 10 0 0 1 0 14.134"/><path d="M4.925 19.067a10 10 0 0 1 0-14.134"/><path d="M7.753 16.239a6 6 0 0 1 0-8.478"/><circle cx="12" cy="12" r="2"/></svg>
-                <span class="font-[Poppins]">Your rooms</span>
+                <span class="font-[Poppins] text-2xl md:text-4xl">Your rooms</span>
             </div>
             <div class="mt-10 w-1/2 flex justify-end">
                 <button class="open-create-room-modal text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-xl px-4 py-2 transition font-semibold">Create Room</button>
