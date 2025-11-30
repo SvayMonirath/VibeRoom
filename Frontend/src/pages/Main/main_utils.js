@@ -3,6 +3,7 @@ let audio = new Audio();
 let currentSongPath = null;
 
 // ------------------- PLAY SONG & PLAYER BAR -------------------
+
 function playSong(path) {
     if (!path) return;
 

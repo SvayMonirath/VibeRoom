@@ -1,8 +1,10 @@
-import { loadSongs, fetchUser  } from './main_utils.js';
+import { loadSongs , fetchUser  } from './main_utils.js';
+import { loadRooms } from './main_room.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchUser();
     loadSongs();
+    loadRooms();
 
     // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
