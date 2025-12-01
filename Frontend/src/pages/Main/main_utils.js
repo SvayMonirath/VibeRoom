@@ -153,8 +153,9 @@ songs.forEach((song) => {
     const songDiv = document.createElement("div");
     const audio = new Audio(`${BACKEND_URL}${song.audio_file_path}`);
 
-    songDiv.className =d
-      "music-container relative flex flex-col items-center gap-4 p-3 bg-white/5 backdrop-blur-lg px-7 rounded-lg cursor-pointer hover:bg-white/10 transition duration-300 group overflow-hidden shadow-lg";
+    songDiv.className =
+    //  i want glass like background
+      "music-container relative flex flex-col items-center gap-4 p-3 bg-white/10 backdrop-blur-lg px-7 rounded-2xl cursor-pointer hover:bg-white/20 transition duration-300 group overflow-hidden shadow-lg";
 
     // Create inner HTML with a placeholder for duration
     songDiv.innerHTML = `
