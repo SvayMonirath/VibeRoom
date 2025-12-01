@@ -1,9 +1,10 @@
-import { loadSongs , fetchUser  } from './main_utils.js';
+import { loadSongsHeader, loadTrendingSongs , fetchUser  } from './main_utils.js';
 import { loadRooms } from './main_room.js';
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchUser();
-    loadSongs();
+    loadSongsHeader();
+    loadTrendingSongs();
     loadRooms();
 
     // Mobile menu toggle

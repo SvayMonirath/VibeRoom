@@ -91,8 +91,8 @@ volumeSlider?.addEventListener("input", () => {
     }
 });
 
-// ------------------- DISPLAY SONGS -------------------
-function displaySongs(songs) {
+// ------------------- DISPLAY SONGS HEADER -------------------
+function displaySongsHeader(songs) {
     const container = document.getElementById('song-container');
     container.innerHTML = '';
 
@@ -144,8 +144,65 @@ function displaySongs(songs) {
     });
 }
 
+// ------------------- DISPLAY TRENDING -------------------
+function displayTrending(songs) {
+  const container = document.getElementById("trendingMusic");
+  container.innerHTML = "";
+
+songs.forEach((song) => {
+    const songDiv = document.createElement("div");
+    const audio = new Audio(`${BACKEND_URL}${song.audio_file_path}`);
+
+    songDiv.className =d
+      "music-container relative flex flex-col items-center gap-4 p-3 bg-white/5 backdrop-blur-lg px-7 rounded-lg cursor-pointer hover:bg-white/10 transition duration-300 group overflow-hidden shadow-lg";
+
+    // Create inner HTML with a placeholder for duration
+    songDiv.innerHTML = `
+        <div class="flex flex-row gap-4 items-center w-full">
+            <img src="${BACKEND_URL}${song.cover_image_path}"
+                style="width: 70px; height: 70px; object-fit: cover;"
+                class="rounded-md transition duration-300 group-hover:blur-sm group-hover:brightness-50" />
+            <div class="mt-2 text-start transition duration-300 group-hover:blur-sm group-hover:opacity-40 ">
+                <div class="text-white font-medium text-xl">${song.title}</div>
+                <div class="text-white font-extralight text-sm md:text-base">${song.artist}</div>
+            </div>
+            <!--  i want duration to be add the end of the div -->
+            <div class="flex flex-auto justify-end mt-2 text-white font-light text-xl duration-display group-hover:blur-sm group-hover:opacity-40"></div>
+        </div>
+
+        <!-- PLAY ICON (hidden until hover) -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                width="70" height="70" fill="white"
+                viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+            </svg>
+        </div>
+    `;
+
+    // Update duration when metadata is loaded
+    const durationDisplay = songDiv.querySelector(".duration-display");
+    audio.addEventListener("loadedmetadata", () => {
+        durationDisplay.textContent = formatTime(audio.duration);
+    });
+
+    songDiv.addEventListener("click", () => {
+        const bar = document.getElementById("player-bar");
+        bar.classList.remove("hidden");
+
+        document.getElementById("player-title").textContent = song.title;
+        document.getElementById("player-artist").textContent = song.artist;
+        document.getElementById("player-cover").src = `${BACKEND_URL}${song.cover_image_path}`;
+
+        playSong(song.audio_file_path);
+    });
+
+    container.appendChild(songDiv);
+});
+}
+
 // ------------------- LOAD SONGS -------------------
-async function loadSongs() {
+async function loadSongsHeader() {
     const token = localStorage.getItem('accessToken');
     const res = await fetch(`${BACKEND_URL}api/v1/musics/get_random/4`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -157,7 +214,23 @@ async function loadSongs() {
     }
 
     const data = await res.json();
-    displaySongs(data.songs);
+    displaySongsHeader(data.songs);
+}
+
+// ------------------- LOAD TRENDING -------------------
+async function loadTrendingSongs() {
+    const token = localStorage.getItem('accessToken');
+    const res = await fetch(`${BACKEND_URL}api/v1/musics/get_random/7`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+    });
+
+    if (!res.ok) {
+        console.error("Failed to load songs");
+        return;
+    }
+
+    const data = await res.json();
+    displayTrending(data.songs);
 }
 
 // ------------------- FETCH USER -------------------
@@ -192,4 +265,4 @@ function formatTime(seconds) {
 }
 
 // ------------------- EXPORT -------------------
-export { loadSongs, fetchUser };
+export { loadSongsHeader, loadTrendingSongs , fetchUser };

@@ -29,7 +29,7 @@
                     </button>
 
                     <!-- Logo -->
-                    <a href="#" class="flex items-center gap-2 select-none">
+                    <a href="../landing_page/landing.html" class="flex items-center gap-2 select-none">
                         <span class="text-2xl lg:text-3xl font-bold text-white">LUNA</span>
                     </a>
                 </div>
@@ -47,7 +47,7 @@
                             <input
                                 id="search"
                                 type="search"
-                                placeholder="Search projects, users, tags..."
+                                placeholder="Search Musics..."
                                 class="w-full pl-10 pr-4 py-2 rounded-full bg-slate-800/80 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                             />
                         </div>
@@ -168,7 +168,7 @@
     </nav>
 
     <section class="pt-24 p-32">
-        <div class="text-white font-[Poppins] text-4xl font-medium gap-6 flex items-center">Welcome <span class="bg-gradient-to-r from-white to-purple-950 bg-clip-text text-transparent text-5xl sm:text-5xl md:text-6xl lg:text-7xl" id="usernameDisplay"></span> </div>
+        <div class="text-white font-[Poppins] text-4xl font-light gap-3 flex items-center">Welcome, <span class="bg-gradient-to-r font-medium from-white to-purple-300 bg-clip-text text-transparent text-3xl sm:text-3xl md:text-4xl lg:text-5xl" id="usernameDisplay"></span> </div>
 
         <div class="text-white/30 text-xl">Ready to vibe with music?</div>
 
@@ -178,9 +178,9 @@
             lg:grid-cols-4
         "></div>
 
-        <!-- Active Rooms -->
-        <div class="flex flex-row">
-            <div class="mt-10 flex gap-2 items-center text-white/80 text-3xl font-medium w-1/2">
+        <!-- Your Room -->
+        <div class="flex flex-row mt-14">
+            <div class="mt-10 flex gap-7 items-center text-white/80 text-3xl font-medium w-1/2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="indigo" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-radio-icon lucide-radio"><path d="M16.247 7.761a6 6 0 0 1 0 8.478"/><path d="M19.075 4.933a10 10 0 0 1 0 14.134"/><path d="M4.925 19.067a10 10 0 0 1 0-14.134"/><path d="M7.753 16.239a6 6 0 0 1 0-8.478"/><circle cx="12" cy="12" r="2"/></svg>
                 <span class="font-[Poppins] text-2xl md:text-4xl">Your rooms</span>
             </div>
@@ -188,13 +188,29 @@
                 <button class="open-create-room-modal text-white bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-xl px-4 py-2 transition font-semibold">Create Room</button>
             </div>
         </div>
-        <div id="rooms-container" class="grid grid-cols-4 gap-4 mt-6
+        <!-- Your Room container -->
+        <div id="rooms-container" class="grid grid-cols-4 gap-4 mt-6 mb-6
             sm:grid-cols-1
             md:grid-cols-2
             lg:grid-cols-3
             xl:grid-cols-4
         ">
         </div>
+
+        <!-- Trending this week -->
+        <div class="flex flex-row mt-14 gap-7 items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 24 24" fill="none" stroke="indigo"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-trending-up-icon lucide-trending-up">
+                <path d="M16 7h6v6" />
+                <path d="m22 7-8.5 8.5-5-5L2 17" />
+            </svg>
+            <span class="text-white text-2xl font-medium ">Trending this week</span>
+        </div>
+        <!-- Trending Music -->
+        <div id="trendingMusic" class="grid grid-cols-1 w-full gap-4 mt-4">
+        </div>
+
 
     </section>
 
