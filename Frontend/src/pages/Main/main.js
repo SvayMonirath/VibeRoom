@@ -1,3 +1,4 @@
+import { showPopup } from '../Account/account_utils.js';
 import { loadSongsHeader, loadTrendingSongs , fetchUser  } from './main_utils.js';
 import { loadRooms } from './main_room.js';
 

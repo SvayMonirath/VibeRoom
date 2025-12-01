@@ -1,7 +1,8 @@
-import { fetchUser } from "./account_utils.js";
+import { fetchUser, fetchOwnedRoomCount } from "./account_utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchUser();
+    fetchOwnedRoomCount();
 
     // Mobile menu toggle
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');

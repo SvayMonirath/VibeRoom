@@ -14,6 +14,9 @@ form.addEventListener('submit', async(e) => {
     if (!username || !password) {
         generalError.textContent = 'Username and password are required.';
         generalError.classList.remove('hidden');
+        setTimeout(() => {
+            generalError.classList.add('hidden');
+        }, 5000);
         return;
     }
 
@@ -32,6 +35,9 @@ form.addEventListener('submit', async(e) => {
             // Show backend error inline
             generalError.textContent = data.message || 'Login failed';
             generalError.classList.remove('hidden');
+            setTimeout(() => {
+                generalError.classList.add('hidden');
+            }, 5000);
         } else {
             localStorage.setItem('accessToken', data.accessToken);
             window.location.href = '../Main/main.html';
@@ -40,5 +46,8 @@ form.addEventListener('submit', async(e) => {
         console.error('Error:', err);
         generalError.textContent = 'Error connecting to server.';
         generalError.classList.remove('hidden');
+        setTimeout(() => {
+            generalError.classList.add('hidden');
+        }, 5000);
     }
 });

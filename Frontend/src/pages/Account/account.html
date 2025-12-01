@@ -17,6 +17,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 </head>
 <body class="bg-gradient-to-tr from-slate-950 via-slate-900 to-slate-950 min-h-screen font-[Poppins] relative overflow-x-hidden">
+
+    <!-- pop up message -->
+    <div id="popupMessage" class="opacity-0 fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500/30 border border-green-400/40 text-white px-6 py-3 rounded-md shadow-lg z-50 transition-opacity duration-300">
+        <span id="popupText"></span>
+    </div>
+
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-black/30 backdrop-blur-md border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -62,7 +68,7 @@
                     <ul class="hidden lg:flex items-center gap-4 mr-2">
                         <li class="">
                             <!-- i want understand to change color gradient  -->
-                            <a href="#" class="flex items-center gap-2 px-3 py-2 rounded-md text-white/90 hover:opacity-70  transition">
+                            <a href="../Main/main.html" class="flex items-center gap-2 px-3 py-2 rounded-md text-white/90 hover:opacity-70  transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                                 </svg>
@@ -75,14 +81,6 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zM12 7v5l3 3"/>
                                 </svg>
                                 <span>Explore</span>
-                            </a>
-                        </li>
-                        <li >
-                            <a href="#" class="open-create-room-modal bg-gradient-to-br from-purple-700 via-blue-500 to-purple-700 flex items-center gap-2 px-3 py-2 rounded-md text-white/90 hover:opacity-70 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
-                                </svg>
-                                <span>Create</span>
                             </a>
                         </li>
                     </ul>
@@ -281,7 +279,7 @@
                 <input type="text" id="update-email-input" class="mt-2 mb-4 px-3 py-1 rounded-md bg-white/5 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition" value="">
             </div>
 
-            <button class="text-white text-sm flex justify-center items-center font-medium bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700">Save Changes</button>
+            <button class="text-white text-sm flex justify-center items-center font-medium bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-700" id="update-user-btn">Save Changes</button>
 
             <hr class="border-white/10 my-6">
 

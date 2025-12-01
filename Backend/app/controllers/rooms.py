@@ -58,10 +58,11 @@ def delete_room(room_id):
     return {"message": "Room deleted successfully."}, 200
 
 # GET ALL ROOMS OPERATION
-@rooms_blp.route('/get_all', methods=['GET'])
+@rooms_blp.route('/get_all_owned_rooms', methods=['GET'])
 @jwt_required()
-def get_all_rooms():
-    rooms = Room.query.all()
+def get_all_owned_rooms():
+    user_id = int(get_jwt_identity())
+    rooms = Room.query.filter_by(owner_id=user_id).all()
     rooms_data = []
     for room in rooms:
         rooms_data.append({
@@ -73,6 +74,7 @@ def get_all_rooms():
             "owner_id": room.owner_id
         })
     return {"rooms": rooms_data}, 200
+
 
 # GET ROOM BY ID OPERATION
 @rooms_blp.route('/get_room/<int:room_id>', methods=['GET'])
@@ -111,3 +113,11 @@ def update_room(room_data, room_id):
 
     db.session.commit()
     return {"message": "Room updated successfully."}, 200
+
+# Get the number of rooms you own
+@rooms_blp.route('/owned-room-count', methods=['GET'])
+@jwt_required()
+def get_owned_room_count():
+    user_id = int(get_jwt_identity())
+    room_count = Room.query.filter_by(owner_id=user_id).count()
+    return {"owned_room_count": room_count}, 200

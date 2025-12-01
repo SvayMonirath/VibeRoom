@@ -7,6 +7,11 @@ form.addEventListener('submit', async (e) => {
     // Clear previous errors
     generalError.textContent = '';
     generalError.classList.add('hidden');
+    generalError.classList.remove('border-red-900/10', 'bg-red-500/20', 'border-green-900/10', 'bg-green-500/20');
+
+    setTimeout(() => {
+        generalError.classList.add('hidden');
+    }, 5000);
 
     // Get input values and trim whitespace
     const username = document.querySelector('input[name="username"]').value.trim();
@@ -18,12 +23,18 @@ form.addEventListener('submit', async (e) => {
     if (!username || !email || !password || !confirmPassword) {
         generalError.textContent = 'All fields are required.';
         generalError.classList.remove('hidden');
+        setTimeout(() => {
+            generalError.classList.add('hidden');
+        }, 5000);
         return;
     }
 
     if (password !== confirmPassword) {
         generalError.textContent = 'Passwords do not match.';
         generalError.classList.remove('hidden');
+        setTimeout(() => {
+            generalError.classList.add('hidden');
+        }, 5000);
         return;
     }
 
@@ -46,8 +57,8 @@ form.addEventListener('submit', async (e) => {
             // Success message (could also redirect immediately)
             generalError.textContent = data.message || 'Registration successful!';
             generalError.classList.remove('hidden');
-            generalError.classList.remove('text-red-400');
-            generalError.classList.add('text-green-400');
+            generalError.classList.remove('border-red-900/10', 'bg-red-500/20');
+            generalError.classList.add('border-green-900/10', 'bg-green-500/20');
 
             // Redirect after 1 second
             setTimeout(() => {
@@ -58,5 +69,8 @@ form.addEventListener('submit', async (e) => {
         console.error('Error:', err);
         generalError.textContent = 'Error connecting to server.';
         generalError.classList.remove('hidden');
+        setTimeout(() => {
+            generalError.classList.add('hidden');
+        }, 5000);
     }
 });

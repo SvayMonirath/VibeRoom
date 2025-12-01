@@ -146,7 +146,7 @@ async function loadRooms() {
     if (!token) return console.error("No access token found");
 
     try {
-        const res = await fetch(`${BACKEND_URL}api/v1/rooms/get_all`, {
+        const res = await fetch(`${BACKEND_URL}api/v1/rooms/get_all_owned_rooms`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,

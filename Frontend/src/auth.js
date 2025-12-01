@@ -1,5 +1,3 @@
-// auth.js
-
 export function checkAuth() {
     const token = localStorage.getItem("accessToken");
     if (!token) {
@@ -13,11 +11,11 @@ export function checkAuth() {
 
         if (Date.now() >= exp) {
             localStorage.removeItem("accessToken");
-            window.location.href = "/login/login.html";
+            window.location.href = "/pages/login/login.html";
         }
     } catch (err) {
         console.error("Invalid token", err);
         localStorage.removeItem("accessToken");
-        window.location.href = "/login/login.html";
+        window.location.href = "/pages/login/login.html";
     }
 }
