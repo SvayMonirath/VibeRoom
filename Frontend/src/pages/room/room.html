@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room</title>
+
+    <script type="module">
+        import { checkAuth } from '../../auth.js';
+        checkAuth();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="./main.css">
@@ -49,7 +54,7 @@
 
             <div class="flex flex-col text-center">
                 <!-- MUSIC COVER  -->
-                <img id="music-cover" src="../../assets/placeholder_music_cover.png" alt="Music Cover" class="w-96 h-96 rounded-xl shadow-lg shadow-purple-700/20 border border-white/10 object-cover">
+                <img id="music-cover" src="../../assets/placeholder_music_cover.png" alt="Music Cover" class="w-96 h-96 rounded-3xl shadow-lg shadow-purple-700/20 border border-white/10 object-cover">
 
                 <!-- MUSIC TITLE -->
                 <h2 id="music-title" class="text-white text-3xl font-semibold mt-6">Music Title</h2>
@@ -93,9 +98,12 @@
         <aside class="w-1/4 bg-black/30 p-6 flex flex-col">
 
             <!-- Queue / Chat Header -->
-            <header class="mb-6 flex flex-row items-center justify-evenly gap-4">
-                <button id="queue-tab" class="text-white font-semibold text-lg underline underline-offset-[10px]">Queue</button>
-                <button id="chat-tab" class="text-white font-semibold text-lg">Chat</button>
+            <header class="mb-6 relative flex flex-row w-full">
+                <button id="queue-btn" class="text-white font-semibold text-lg flex-1 z-10">Queue</button>
+                <button id="chat-btn" class="text-white font-semibold text-lg flex-1 z-10">Chat</button>
+
+                <!-- Purple underline -->
+                <div id="underline" class="absolute bottom-0 left-0 h-0.5 w-1/2 bg-purple-500 transition-all duration-300"></div>
             </header>
 
             <!-- CHAT CONTENT -->
@@ -122,10 +130,10 @@
             </div>
 
             <!-- QUEUE CONTENT -->
-            <div id="queue-content" class="hidden flex flex-col flex-grow">
+            <div id="queue-content" class=" flex flex-col flex-grow pt-5">
                 <div>
                     <button id="add-to-queue-btn"
-                        class="text-white rounded-xl w-full bg-purple-700 py-2 hover:opacity-65 transition-opacity">
+                        class="text-white font-medium rounded-xl w-full bg-purple-600 py-2 hover:opacity-65 transition-opacity">
                         + Add to Queue
                     </button>
                 </div>
@@ -135,5 +143,7 @@
             </div>
         </aside>
     </div>
+
+    <script type="module" src="./room.js"></script>
 </body>
 </html>

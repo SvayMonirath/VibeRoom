@@ -1,13 +1,65 @@
-// TODO[]: Fetch Room Name
-// TODO[]: Fetch Room Vibe
+const BACKEND_URL = 'http://localhost:5001/api/v1';
+
+// TODO[X]: Fetch Room Name
+// TODO[X]: Fetch Room Vibe
+const roomName = document.getElementById('room-name');
+const roomVibe = document.getElementById('room-vibe');
+export async function fetchRoomInfo() {
+
+    const params = new URLSearchParams(window.location.search);
+    const room_id = params.get('room_id');
+
+    try {
+        const res = await fetch(`${BACKEND_URL}/rooms/get_room/${room_id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        const data = await res.json();
+        if(!res.ok){
+            console.error("→ Error fetching room info:", data.message);
+        } else {
+            console.log("→ Fetched room info:", data);
+            roomName.textContent = data.room.title;
+            roomVibe.textContent = data.room.vibe;
+        }
+
+    } catch (err) {
+        console.error('Error fetching room info:', err);
+    }
+
+}
+
+
 // TODO[]: Fetch listener count
 
-// TODO[]: Implement leave room button redirect to main page
+// TODO[X]: Implement leave room button redirect to main page
+const leaveRoomBtn = document.getElementById('leave-room-btn');
+leaveRoomBtn?.addEventListener('click', () => {
+    window.location.href = '../Main/main.html';
+});
 
-// TODO[]: Implement Show queue container
-// TODO[]: Implement Hide queue container
-// TODO[]: Implement Show chat container
-// TODO[]: Implement Hide chat container
+
+const queueBtn = document.getElementById('queue-btn');
+const chatBtn = document.getElementById('chat-btn');
+const queueContent = document.getElementById('queue-content');
+const chatContent = document.getElementById('chat-content');
+const underline = document.getElementById('underline');
+
+queueBtn.addEventListener('click', () => {
+    queueContent.classList.remove('hidden');
+    chatContent.classList.add('hidden');
+    underline.style.left = '0%';
+});
+
+chatBtn.addEventListener('click', () => {
+    chatContent.classList.remove('hidden');
+    queueContent.classList.add('hidden');
+    underline.style.left = '50%';
+});
+
+
 
 // TODO[]: Implement Show Music name
 // TODO[]: Implement Show Music artist
