@@ -133,7 +133,7 @@ function createRoomCard(room) {
     }
 
     roomDiv.addEventListener('click', () => {
-        alert(`Joining room: ${room.title}`);
+        window.location.href = `../room/room.html?room_id=${room.id}`;
     });
 
     return roomDiv;

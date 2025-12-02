@@ -121,3 +121,6 @@ def get_owned_room_count():
     user_id = int(get_jwt_identity())
     room_count = Room.query.filter_by(owner_id=user_id).count()
     return {"owned_room_count": room_count}, 200
+
+# TODO[]: ENTERING ROOMS AND ADDING MUSIC TO ROOMS
+# TODO[]: CHATTING IN ROOMS

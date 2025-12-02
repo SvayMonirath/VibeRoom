@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="../../css/global.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="bg-gradient-to-tr from-slate-950 via-slate-900 to-slate-950 min-h-screen font-[Poppins] relative overflow-x-hidden overflow-y-hidden">
+    <header class="bg-black/30 px-6 py-4 flex items-center gap-5">
+        <div class="size-12 rounded-xl bg-gradient-to-br from-purple-600/20 to pink-600/20 flex justify-center items-center border border-white/10 shadow-lg shadow-purple-700/10">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-music-icon lucide-music size-6 text-purple-400"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <div class="flex flex-col gap-1">
+            <!-- Room Name -->
+            <h1 id="room-name" class="text-white text-xl font-semibold">Name</h1>
+            <div class="flex flex-row items-center gap-2">
+                <div class="size-2 rounded-full bg-green-500 animate-pulse"></div>
+                <!-- Listener Count -->
+                <span id="listener-count" class="text-slate-600">0</span>
+                <span class="text-slate-600"> listening</span>
+
+                <!-- Room Vibe Tag -->
+                <div id="room-vibe" class="px-2 py-0.5 rounded-full bg-purple-600/20 border border-purple-500/30 text-purple-400 text-xs">vibe</div>
+            </div>
+        </div>
+        <div class="flex-grow"></div>
+
+        <div class="flex items-center gap-4">
+            <!-- Leave Room Btn -->
+            <button id="leave-room-btn" class="ml-auto px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition hover:scale-[1.03] bg-gradient-to-r from-purple-600 to-blue-700 text-white font-medium flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out text-white"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex flex-row flex-grow min-h-0">
+        <section class="w-3/4 bg-gradient-to-br from-purple-900/20 via-transparent to-pink-900/20 flex justify-center px-14 py-20 relative">
+
+            <!-- Pulsing Effect -->
+            <div class="w-96 h-96 rounded-full bg-purple-600/20 blur-3xl animate-pulse absolute top-1/4 left-1/4"></div>
+            <div class="w-96 h-96 rounded-full bg-pink-600/20 blur-3xl animate-pulse absolute bottom-1/4 right-1/4"></div>
+
+            <div class="flex flex-col text-center">
+                <!-- MUSIC COVER  -->
+                <img id="music-cover" src="../../assets/placeholder_music_cover.png" alt="Music Cover" class="w-96 h-96 rounded-xl shadow-lg shadow-purple-700/20 border border-white/10 object-cover">
+
+                <!-- MUSIC TITLE -->
+                <h2 id="music-title" class="text-white text-3xl font-semibold mt-6">Music Title</h2>
+
+                <!-- MUSIC ARTIST -->
+                <p id="music-artist" class="text-white/70 text-lg mt-2">Artist Name</p>
+
+                <div class="flex flex-col w-96 items-center gap-4 mt-6 mb-6">
+                    <!-- SEEK BAR -->
+                    <input id="seekBar" type="range" min="0" value="0"
+                        class="flex-grow h-7 rounded-full bg-gray-600 accent-white w-full" />
+                    <div class="flex justify-between w-full">
+                        <!-- CURRENT TIME -->
+                        <span id="current-time" class="text-white/70 text-sm">0:00</span>
+
+                        <!-- TOTAL DURATION -->
+                        <span id="total-duration" class="text-white/70 text-sm">0:00</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-around">
+                    <!-- SHUFFLE BUTTON -->
+                    <button id="shuffle-btn" class="p-3 rounded-full hover:bg-white/10 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shuffle-icon lucide-shuffle text-slate-400"><path d="m18 14 4 4-4 4"/><path d="m18 2 4 4-4 4"/><path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22"/><path d="M2 6h1.972a4 4 0 0 1 3.6 2.2"/><path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"/></svg>
+                    </button>
+                    <button id="prev-btn" class="p-3 rounded-full hover:bg-white/10 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-skip-back-icon lucide-skip-back text-slate-400"><path d="M17.971 4.285A2 2 0 0 1 21 6v12a2 2 0 0 1-3.029 1.715l-9.997-5.998a2 2 0 0 1-.003-3.432z"/><path d="M3 20V4"/></svg>
+                    </button>
+                    <button id="play-pause-btn" class="p-3 rounded-full hover:bg-white/40 transition rouended-full bg-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="black" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pause-icon lucide-pause text-black size-8"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>
+                    </button>
+                    <button id="next-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-skip-forward-icon lucide-skip-forward text-slate-400 "><path d="M21 4v16"/><path d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z"/></svg>
+                    </button>
+                    <button id="repeat-btn" class="p-3 rounded-full hover:bg-white/10 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-repeat-icon lucide-repeat text-slate-400"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <aside class="w-1/4 bg-black/30 p-6 flex flex-col">
+
+            <!-- Queue / Chat Header -->
+            <header class="mb-6 flex flex-row items-center justify-evenly gap-4">
+                <button id="queue-tab" class="text-white font-semibold text-lg underline underline-offset-[10px]">Queue</button>
+                <button id="chat-tab" class="text-white font-semibold text-lg">Chat</button>
+            </header>
+
+            <!-- CHAT CONTENT -->
+            <div id="chat-content" class="hidden flex flex-col flex-grow">
+                <!-- Message list (scrolling) -->
+                <div id="message-container"
+                    class="flex flex-col gap-4 flex-grow overflow-y-auto pr-2">
+                </div>
+
+                <!-- Chat Input -->
+                <div class="mt-4">
+                    <div class="flex flex-row gap-2">
+                        <!-- message input -->
+                        <input id="message-input" type="text" placeholder="Type your message..."
+                            class="flex-grow px-4 py-2 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-purple-600 w-1/2" />
+
+                        <!-- send message button -->
+                        <button id="send-message-btn"
+                            class="px-4 py-2 rounded-lg bg-purple-700 text-white hover:opacity-75 transition-opacity">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-icon lucide-send text-white"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUEUE CONTENT -->
+            <div id="queue-content" class="hidden flex flex-col flex-grow">
+                <div>
+                    <button id="add-to-queue-btn"
+                        class="text-white rounded-xl w-full bg-purple-700 py-2 hover:opacity-65 transition-opacity">
+                        + Add to Queue
+                    </button>
+                </div>
+
+                <div id="queue-music-container" class="flex flex-col gap-4 mt-4 overflow-y-auto pr-2">
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
