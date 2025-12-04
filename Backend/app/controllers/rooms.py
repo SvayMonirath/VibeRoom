@@ -70,6 +70,16 @@ def delete_room(room_id):
 
     return {"message": "Room deleted successfully."}, 200
 
+@rooms_blp.route('/check_room_password/<int:room_id>', methods=['POST'])
+def check_room_password(room_id):
+    data = request.get_json()
+    entered_password = data.get("password")
+    room = Room.query.get_or_404(room_id)
+    if room.password == entered_password:
+        return {'access': True}, 200
+    else:
+        return {'access': False}, 200
+
 # GET ALL ROOMS OPERATION
 @rooms_blp.route('/get_all_owned_rooms', methods=['GET'])
 @jwt_required()
@@ -88,11 +98,14 @@ def get_all_owned_rooms():
         })
     return {"rooms": rooms_data}, 200
 
+# HELPER FUNCTION TO CHECK ROOM ACCESS
 
 # GET ROOM BY ID OPERATION
 @rooms_blp.route('/get_room/<int:room_id>', methods=['GET'])
 def get_room_by_id(room_id):
     room = Room.query.get_or_404(room_id)
+
+
     room_data = {
         "id": room.id,
         "title": room.title,
@@ -115,16 +128,29 @@ def update_room(room_data, room_id):
     if room.owner_id != user_id:
         return {"message": "You do not have permission to update this room."}, 403
 
+    updated = False
+
     # handle just name and genre for now
     if 'name' in room_data:
         room.title = room_data['name']
-    elif 'vibe' in room_data:
+        updated = True
+    if 'vibe' in room_data:
         room.vibe = room_data['vibe']
-    else:
+        updated = True
+    if not updated:
         return {"message": "No valid fields to update."}, 400
 
     db.session.commit()
-    return {"message": "Room updated successfully."}, 200
+    return {
+        "message": "Room updated successfully.",
+        "room": {
+            "id": room.id,
+            "title": room.title,
+            "vibe": room.vibe,
+            "is_private": room.is_private,
+            "owner_id": room.owner_id
+        }
+    }, 200
 
 # Get the number of rooms you own
 @rooms_blp.route('/owned-room-count', methods=['GET'])

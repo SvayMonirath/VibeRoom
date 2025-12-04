@@ -381,6 +381,24 @@
         </div>
     </div>
 
+
+
+    <!-- Private Room Overlay -->
+    <div id="private_room_overlay" class="hidden fixed inset-0 bg-black/30 backdrop-blur-md z-40"></div>
+
+    <div id="private_room_pwd_confirmation" class="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-900/30 border border-blue-500/40 backdrop-blur-md p-10 rounded-lg flex flex-col shadow-lg  z-50 gap-7">
+        <h2 class="text-white text-5xl font-semibold">Private Room Password</h2>
+        <p class="text-slate-500 font-normal text-md">Must Enter Password to Access</p>
+        <div class="flex flex-col w-full gap-2">
+            <label for="private_room_password_input" class="text-white font-light mb-2">Password</label>
+            <input id="private_room_password_input" type="password" class="p-3 bg-gray-500/10 rounded-lg border border-white/20 text-white focus:outline-none focus:border-purple-500 placeholder-white/40 w-full" placeholder="Enter password"/>
+        </div>
+        <div class="w-full justify-center flex mt-10 gap-4">
+            <button id="private_room_password_submit_btn" class="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 rounded-xl px-4 py-2 text-white font-semibold transition w-1/4 ">Submit</button>
+            <button id="private_room_password_cancel_btn" class="bg-white/10 hover:bg-white/20 rounded-xl px-4 py-2 text-white font-semibold transition  w-1/4">Cancel</button>
+        </div>
+    </div>
+
     <script type="module" src="./main.js"></script>
 </body>
 </html>

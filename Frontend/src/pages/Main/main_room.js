@@ -1,4 +1,38 @@
 const BACKEND_URL = 'http://localhost:5001/';
+// Show popup message
+function showPopup(message, type = "success") {
+    const popup = document.getElementById("popupMessage");
+    const text = document.getElementById("popupText");
+
+    // Set the text
+    text.textContent = message;
+
+    // Reset previous type classes
+    popup.classList.remove(
+        "bg-green-500/30", "border-green-400/40",
+        "bg-red-500/30", "border-red-400/40",
+        "bg-yellow-500/30", "border-yellow-400/40"
+    );
+
+    // Add classes based on type
+    if (type === "success") {
+        popup.classList.add("bg-green-500/30", "border-green-400/40");
+    } else if (type === "error") {
+        popup.classList.add("bg-red-500/30", "border-red-400/40");
+    } else if (type === "warning") {
+        popup.classList.add("bg-yellow-500/30", "border-yellow-400/40");
+    }
+
+    // Show popup
+    popup.classList.remove("opacity-0");
+    popup.classList.add("opacity-100");
+
+    setTimeout(() => {
+        popup.classList.add("opacity-0");
+        popup.classList.remove("opacity-100");
+    }, 7000);
+}
+
 
 // ------------------ Handle Room Pop-up ------------------
 const createRoomModal = document.getElementById('create-room-modal');
@@ -132,8 +166,62 @@ function createRoomCard(room) {
         roomDiv.innerHTML += `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="red" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute top-2 right-2 lucide lucide-lock-icon lucide-lock"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>`;
     }
 
+    const privateRoomOverlay = document.getElementById('private_room_overlay');
+    const privateRoomPwdConfirmation = document.getElementById('private_room_pwd_confirmation');
+    const privateRoomPasswordInput = document.getElementById('private_room_password_input');
+    const privateRoomPasswordSubmitBtn = document.getElementById('private_room_password_submit_btn');
+    const privateRoomPasswordCancelBtn = document.getElementById('private_room_password_cancel_btn');
+
+    function closePrivateRoomModal() {
+        privateRoomPwdConfirmation.classList.add('hidden');
+        privateRoomOverlay.classList.add('hidden');
+        privateRoomPasswordInput.value = '';
+    }
+
+    privateRoomPasswordCancelBtn?.addEventListener('click', () => {
+        closePrivateRoomModal();
+    });
+
+    privateRoomPasswordSubmitBtn?.addEventListener('click', async () => {
+        const enteredPassword = privateRoomPasswordInput.value;
+
+        try {
+            const res = await fetch(`${BACKEND_URL}api/v1/rooms/check_room_password/${room.id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify({
+                    room_id: room.id,
+                    password: enteredPassword
+                })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                showPopup(data.message || 'Incorrect password', 'error');
+            } else if (data.access) {
+                window.location.href = `../room/room.html?room_id=${room.id}?room_password=${enteredPassword}`;
+            }
+
+    }
+        catch (err) {
+            console.error("Error checking room password:", err);
+        }
+    });
+
     roomDiv.addEventListener('click', () => {
-        window.location.href = `../room/room.html?room_id=${room.id}`;
+
+        if (room.is_private) {
+            privateRoomOverlay.classList.remove('hidden');
+            privateRoomPwdConfirmation.classList.remove('hidden');
+
+        } else {
+            window.location.href = `../room/room.html?room_id=${room.id}`;
+        }
+
     });
 
     return roomDiv;
