@@ -31,6 +31,26 @@ export async function fetchRoomInfo() {
 
 }
 
+// TODO[]: SHOW SETTING BTN
+
+const settingBtn = document.getElementById('setting-btn');
+const settingContent = document.getElementById('setting-content');
+
+const queueBtn = document.getElementById('queue-btn');
+const chatBtn = document.getElementById('chat-btn');
+
+const queueContent = document.getElementById('queue-content');
+const chatContent = document.getElementById('chat-content');
+
+const underline = document.getElementById('underline');
+
+settingBtn?.addEventListener('click', () => {
+    settingContent.classList.remove('hidden');
+    chatContent.classList.add('hidden');
+    queueContent.classList.add('hidden');
+    underline.classList.add('hidden');
+});
+
 
 // TODO[]: Fetch listener count
 
@@ -41,21 +61,20 @@ leaveRoomBtn?.addEventListener('click', () => {
 });
 
 
-const queueBtn = document.getElementById('queue-btn');
-const chatBtn = document.getElementById('chat-btn');
-const queueContent = document.getElementById('queue-content');
-const chatContent = document.getElementById('chat-content');
-const underline = document.getElementById('underline');
 
 queueBtn.addEventListener('click', () => {
     queueContent.classList.remove('hidden');
+    settingContent.classList.add('hidden');
     chatContent.classList.add('hidden');
+    underline.classList.remove('hidden');
     underline.style.left = '0%';
 });
 
 chatBtn.addEventListener('click', () => {
     chatContent.classList.remove('hidden');
+    settingContent.classList.add('hidden');
     queueContent.classList.add('hidden');
+    underline.classList.remove('hidden');
     underline.style.left = '50%';
 });
 

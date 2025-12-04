@@ -12,6 +12,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="./room.css">
     <link rel="stylesheet" href="../../css/global.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,19 +43,29 @@
             <button id="leave-room-btn" class="ml-auto px-4 py-2 rounded-lg shadow-md hover:shadow-lg transition hover:scale-[1.03] bg-gradient-to-r from-purple-600 to-blue-700 text-white font-medium flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out-icon lucide-log-out text-white"><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/></svg>
             </button>
+
+            <!-- setting BTN -->
+            <button id="setting-btn" class="p-2 rounded-lg hover:bg-white/10 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings-icon lucide-settings text-white">
+                    <path
+                        d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" />
+                    <circle cx="12" cy="12" r="3" />
+                </svg>
+            </button>
         </div>
     </header>
 
-    <div class="flex flex-row flex-grow min-h-0">
-        <section class="w-3/4 bg-gradient-to-br from-purple-900/20 via-transparent to-pink-900/20 flex justify-center px-14 py-20 relative">
+    <div class="flex flex-row flex-grow min-h-screen">
+        <section class="w-1/2 bg-gradient-to-br from-purple-900/20 via-transparent to-pink-900/20 flex justify-center px-14 py-20 relative lg:w-2/3 xl:w-3/4">
 
             <!-- Pulsing Effect -->
             <div class="w-96 h-96 rounded-full bg-purple-600/20 blur-3xl animate-pulse absolute top-1/4 left-1/4"></div>
             <div class="w-96 h-96 rounded-full bg-pink-600/20 blur-3xl animate-pulse absolute bottom-1/4 right-1/4"></div>
 
-            <div class="flex flex-col text-center">
+            <div class="flex flex-col text-center justify-center items-center z-10">
                 <!-- MUSIC COVER  -->
-                <img id="music-cover" src="../../assets/placeholder_music_cover.png" alt="Music Cover" class="w-96 h-96 rounded-3xl shadow-lg shadow-purple-700/20 border border-white/10 object-cover">
+                <img id="music-cover" src="../../assets/placeholder_music_cover.png" alt="Music Cover" class="w-56 h-56 rounded-3xl shadow-lg shadow-purple-700/20 border border-white/10 object-cover md:w-72 md:h-72 xl:w-[35rem] xl:h-[35rem]" />
 
                 <!-- MUSIC TITLE -->
                 <h2 id="music-title" class="text-white text-3xl font-semibold mt-6">Music Title</h2>
@@ -62,10 +73,10 @@
                 <!-- MUSIC ARTIST -->
                 <p id="music-artist" class="text-white/70 text-lg mt-2">Artist Name</p>
 
-                <div class="flex flex-col w-96 items-center gap-4 mt-6 mb-6">
+                <div class="flex flex-col w-96 items-center gap-4 mt-6 lg-6">
                     <!-- SEEK BAR -->
                     <input id="seekBar" type="range" min="0" value="0"
-                        class="flex-grow h-7 rounded-full bg-gray-600 accent-white w-full" />
+                        class="flex-grow h-7 rounded-full bg-gray-600 accent-white w-1/2 md:w-full" />
                     <div class="flex justify-between w-full">
                         <!-- CURRENT TIME -->
                         <span id="current-time" class="text-white/70 text-sm">0:00</span>
@@ -75,7 +86,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row justify-around">
+                <div class="flex flex-row justify-around gap-4">
                     <!-- SHUFFLE BUTTON -->
                     <button id="shuffle-btn" class="p-3 rounded-full hover:bg-white/10 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shuffle-icon lucide-shuffle text-slate-400"><path d="m18 14 4 4-4 4"/><path d="m18 2 4 4-4 4"/><path d="M2 18h1.973a4 4 0 0 0 3.3-1.7l5.454-8.6a4 4 0 0 1 3.3-1.7H22"/><path d="M2 6h1.972a4 4 0 0 1 3.6 2.2"/><path d="M22 18h-6.041a4 4 0 0 1-3.3-1.8l-.359-.45"/></svg>
@@ -95,10 +106,10 @@
                 </div>
             </div>
         </section>
-        <aside class="w-1/4 bg-black/30 p-6 flex flex-col">
+        <aside class="w-1/2 bg-black/30 p-6 flex flex-col lg:w-1/3 xl:w-1/4 h-screen">
 
-            <!-- Queue / Chat Header -->
-            <header class="mb-6 relative flex flex-row w-full">
+            <!-- Tabs Header -->
+            <header class="mb-4 relative flex flex-row w-full">
                 <button id="queue-btn" class="text-white font-semibold text-lg flex-1 z-10">Queue</button>
                 <button id="chat-btn" class="text-white font-semibold text-lg flex-1 z-10">Chat</button>
 
@@ -106,42 +117,135 @@
                 <div id="underline" class="absolute bottom-0 left-0 h-0.5 w-1/2 bg-purple-500 transition-all duration-300"></div>
             </header>
 
-            <!-- CHAT CONTENT -->
-            <div id="chat-content" class="hidden flex flex-col flex-grow">
-                <!-- Message list (scrolling) -->
-                <div id="message-container"
-                    class="flex flex-col gap-4 flex-grow overflow-y-auto pr-2">
-                </div>
+            <!-- Scrollable Content -->
+            <div id="scrollable-div" class="flex flex-col flex-grow overflow-y-auto pb-32 gap-6">
 
-                <!-- Chat Input -->
-                <div class="mt-4">
-                    <div class="flex flex-row gap-2">
-                        <!-- message input -->
-                        <input id="message-input" type="text" placeholder="Type your message..."
-                            class="flex-grow px-4 py-2 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-purple-600 w-1/2" />
+                <!-- SETTING CONTENT -->
+                <div id="setting-content" class="hidden flex flex-col gap-4">
+                    <div class="text-center mb-4">
+                        <span class="text-white font-medium text-2xl">Room Setting</span>
+                    </div>
 
-                        <!-- send message button -->
-                        <button id="send-message-btn"
-                            class="px-4 py-2 rounded-lg bg-purple-700 text-white hover:opacity-75 transition-opacity">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send-icon lucide-send text-white"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
-                        </button>
+                    <!-- Room INFO -->
+                    <div class="p-5 border border-white/10 rounded-xl flex flex-col gap-5">
+                        <div class="text-white flex flex-row items-center gap-5 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon">
+                                <path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                <path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z" />
+                            </svg>
+                            <span class="text-xl">Room Information</span>
+                        </div>
+
+                        <div class="flex flex-col gap-3">
+                            <label for="room-name-input" class="text-white font-medium">Room Name</label>
+                            <input id="room-name-input" type="text" placeholder="Enter room name"
+                                class="px-4 py-2 rounded-lg bg-black/50 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-purple-600 w-full" />
+                        </div>
+
+                        <div class="flex flex-col gap-3">
+                            <label for="room-vibe-input" class="text-white font-medium">Room Vibe</label>
+                            <input id="room-vibe-input" type="text" placeholder="Enter room vibe"
+                                class="px-4 py-2 rounded-lg bg-black/50 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-purple-600 w-full" />
+                        </div>
+
+                        <div class="flex justify-center mt-4">
+                            <button id="name/vibe-change-btn"
+                                class="px-5 py-3 cursor-not-allowed opacity-30 flex justify-center items-center text-white bg-gradient-to-br from-blue-600 to-purple-600 rounded-full w-1/2">
+                                Save Change
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Privacy & Security -->
+                    <div class="p-5 border border-white/10 rounded-xl flex flex-col gap-5">
+                        <div class="text-white flex flex-row items-center gap-5 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-icon">
+                                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                            </svg>
+                            <span class="text-xl">Privacy & Security</span>
+                        </div>
+
+                        <div class="flex flex-row justify-between items-center">
+                            <div>
+                                <p class="text-white text-lg">Private room</p>
+                                <p class="text-gray-600 text-sm">Make room private to others</p>
+                            </div>
+                            <button id="private-room-btn" class="text-white text-lg font-normal flex justify-center items-center bg-gradient-to-br from-blue-600 to-purple-600 rounded-full px-5 py-1">
+                                On
+                            </button>
+                        </div>
+
+                        <div class="flex flex-row justify-between items-center mt-4">
+                            <p class="text-white text-lg">Max listeners</p>
+                            <select id="max-listeners-select" class="bg-black/50 border border-white/20 px-4 py-2 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-600">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="250">250</option>
+                                <option value="500">500</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="p-5 border border-white/10 rounded-xl flex flex-col gap-4">
+                        <div class="text-white flex flex-row items-center gap-5 mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-triangle-alert-icon">
+                                <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+                                <path d="M12 9v4" />
+                                <path d="M12 17h.01" />
+                            </svg>
+                            <span class="text-xl">Danger Zone</span>
+                        </div>
+
+                        <!-- Kick User -->
+                        <div class="flex flex-col gap-6">
+                            <div class="flex flex-row justify-between items-center gap-2">
+                                <div class="flex flex-col w-2/3 text-white">
+                                    <p class="font-medium text-lg">Kick User</p>
+                                    <p class="text-gray-600 text-sm">Kick User from the room</p>
+                                </div>
+                                <button id="kick-user-btn" class="w-1/3 px-5 py-2 bg-red-900/30 border border-red-500/40 rounded-full text-white hover:opacity-75 transition-opacity">Kick User</button>
+                            </div>
+
+                            <!-- Ban User -->
+                            <div class="flex flex-row justify-between items-center gap-2">
+                                <div class="flex flex-col w-2/3 text-white">
+                                    <p class="font-medium text-lg">Ban User</p>
+                                    <p class="text-gray-600 text-sm">Permanently preventing a user from rejoining the room</p>
+                                </div>
+                                <button id="ban-user-btn" class="w-1/3 px-5 py-2 bg-red-900/30 border border-red-500/40 rounded-full text-white hover:opacity-75 transition-opacity">Ban User</button>
+                            </div>
+
+                            <button id="delete-room-btn" class="w-full px-5 py-2 bg-red-900/30 border border-red-500/40 rounded-full text-white hover:opacity-75 transition-opacity text-xl">Delete Room</button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- QUEUE CONTENT -->
-            <div id="queue-content" class=" flex flex-col flex-grow pt-5">
-                <div>
-                    <button id="add-to-queue-btn"
-                        class="text-white font-medium rounded-xl w-full bg-purple-600 py-2 hover:opacity-65 transition-opacity">
+                <!-- QUEUE CONTENT -->
+                <div id="queue-content" class="flex flex-col gap-4">
+                    <button id="add-to-queue-btn" class="text-white font-medium rounded-xl w-full bg-purple-600 py-2 hover:opacity-65 transition-opacity">
                         + Add to Queue
                     </button>
+                    <div id="queue-music-container" class="flex flex-col gap-4 mt-4"></div>
                 </div>
 
-                <div id="queue-music-container" class="flex flex-col gap-4 mt-4 overflow-y-auto pr-2">
+                <!-- CHAT CONTENT -->
+                <div id="chat-content" class="flex flex-col flex-grow gap-2">
+                    <div id="message-container" class="flex flex-col gap-4 flex-grow overflow-y-auto pr-2"></div>
+                    <div class="flex flex-row gap-2 mt-auto">
+                        <input id="message-input" type="text" placeholder="Type your message..." class="flex-grow px-4 py-2 rounded-lg bg-black/50 border border-white/10 text-white focus:outline-none focus:ring-2 focus:ring-purple-600" />
+                        <button id="send-message-btn" class="px-4 py-2 rounded-lg bg-purple-700 text-white hover:opacity-75 transition-opacity">Send</button>
+                    </div>
                 </div>
+
             </div>
         </aside>
+
     </div>
 
     <script type="module" src="./room.js"></script>

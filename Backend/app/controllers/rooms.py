@@ -1,6 +1,8 @@
+from flask import request
 from flask_smorest import Blueprint, abort
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
+from ..services.room_state import get_room_state, add_song, play, pause, leave, join, rooms_state
 from ..schemas.room_schemas import CreateRoomSchema, EditRoomSchema
 from ..models.models import Room, db
 
@@ -41,6 +43,14 @@ def create_room(room_data):
 
     db.session.add(room)
     db.session.commit()
+
+    rooms_state[room.id] = {
+        'queue': [],
+        'current_song': None,
+        'is_playing': False,
+        'listeners': 0
+    }
+
     return {"message": "Room created successfully.", "room_id": room.id}, 201
 
 # DELETE ROOM OPERATION
@@ -55,6 +65,9 @@ def delete_room(room_id):
 
     db.session.delete(room)
     db.session.commit()
+
+    rooms_state.pop(room_id, None)
+
     return {"message": "Room deleted successfully."}, 200
 
 # GET ALL ROOMS OPERATION
@@ -121,4 +134,55 @@ def get_owned_room_count():
     room_count = Room.query.filter_by(owner_id=user_id).count()
     return {"owned_room_count": room_count}, 200
 
-# fetch room info
+@rooms_blp.route('/state/get_all_room_state', methods=['GET'])
+def get_all_room_state():
+    return rooms_state, 200
+
+# Get live room state
+@rooms_blp.route('/state/<int:room_id>', methods=['GET'])
+@jwt_required()
+def get_live_state(room_id):
+    state = get_room_state(room_id)
+    if not state:
+        return {"message": "Room not found"}, 404
+    return {"room_state": state}, 200
+
+
+# Add a song
+@rooms_blp.route('/state/<int:room_id>/add_song', methods=['POST'])
+@jwt_required()
+def add_song_route(room_id):
+    data = request.get_json()
+    song = data.get("song")
+    room_state = add_song(room_id, song)
+    return room_state, 200
+
+
+# Play / Pause
+@rooms_blp.route('/state/<int:room_id>/play', methods=['POST'])
+@jwt_required()
+def play_route(room_id):
+    room_state = play(room_id)
+    return room_state, 200
+
+
+@rooms_blp.route('/state/<int:room_id>/pause', methods=['POST'])
+@jwt_required()
+def pause_route(room_id):
+    room_state = pause(room_id)
+    return room_state, 200
+
+
+# Join / Leave
+@rooms_blp.route('/state/<int:room_id>/join', methods=['POST'])
+@jwt_required()
+def join_route(room_id):
+    room_state = join(room_id)
+    return room_state, 200
+
+
+@rooms_blp.route('/state/<int:room_id>/leave', methods=['POST'])
+@jwt_required()
+def leave_route(room_id):
+    room_state = leave(room_id)
+    return room_state, 200
