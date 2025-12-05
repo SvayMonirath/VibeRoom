@@ -202,8 +202,9 @@ function createRoomCard(room) {
 
             const data = await res.json();
 
-            if (!res.ok) {
+            if (!data.access) {
                 showPopup(data.message || 'Incorrect password', 'error');
+                privateRoomPasswordInput.value = '';
             } else if (data.access) {
                 localStorage.setItem(`roomToken_${room.id}`, data.room_token);
                 window.location.href = `../room/room.html?room_id=${room.id}`;

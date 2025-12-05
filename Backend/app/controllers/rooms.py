@@ -134,7 +134,7 @@ def get_all_owned_rooms():
 
 # GET ROOM BY ID OPERATION
 @rooms_blp.route('/get_room/<int:room_id>', methods=['GET'])
-@jwt_required()
+@jwt_required(optional=True)
 def get_room_by_id(room_id):
     room = Room.query.get_or_404(room_id)
 

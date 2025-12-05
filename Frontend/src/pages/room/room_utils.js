@@ -51,21 +51,16 @@ export async function fetchRoomInfo() {
     const room_id = params.get('room_id');
 
     const roomToken = localStorage.getItem(`roomToken_${room_id}`);
-    const accessToken = localStorage.getItem('accessToken');
+    const headers = { 'Content-Type': 'application/json' };
 
-    if (!roomToken) {
-        showPopup("You cannot access this room.", "error");
-        window.location.href = '../Main/main.html';
-        return;
+    if (roomToken) {
+        headers['Authorization'] = `Bearer ${roomToken}`;
     }
 
     try {
         const res = await fetch(`${BACKEND_URL}/rooms/get_room/${room_id}`, {
             method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${roomToken}`
-            }
+            headers
         });
 
         const data = await res.json();
@@ -87,8 +82,6 @@ export async function fetchRoomInfo() {
         showPopup("Server unreachable", "error");
     }
 }
-
-
 
 // TODO[X]: SHOW SETTING BTN
 
