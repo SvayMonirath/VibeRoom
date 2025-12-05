@@ -75,6 +75,56 @@ function displaySearchResults(songs) {
         searchResults.appendChild(div);
     });
 }
+// ------------------- MOBILE SEARCH FUNCTIONALITY -------------------
+
+const mobileSearchInput = document.getElementById("mobileSearch");
+const mobileSearchResults = document.getElementById("mobileSearchResults");
+
+mobileSearchInput.addEventListener("input", async () => {
+  const query = mobileSearchInput.value.trim();
+  if (!query) {
+    mobileSearchResults.innerHTML = "";
+    mobileSearchResults.classList.add("hidden");
+    return;
+  }
+
+  try {
+    const res = await fetch(`${BACKEND_URL}api/v1/musics/search?q=${encodeURIComponent(query)}`);
+    const data = await res.json();
+    displayMobileResults(data.songs);
+  } catch (err) {
+    console.error("Mobile search failed:", err);
+  }
+});
+
+function displayMobileResults(songs) {
+  mobileSearchResults.innerHTML = '';
+
+  if (!songs || songs.length === 0) {
+    mobileSearchResults.innerHTML = `<div class="text-white/70 p-2">No songs found.</div>`;
+    mobileSearchResults.classList.remove("hidden");
+    return;
+  }
+
+  songs.forEach(song => {
+    const div = document.createElement('div');
+    div.className = "flex items-center gap-3 p-2 hover:bg-white/10 rounded-lg cursor-pointer transition";
+    div.innerHTML = `
+      <img src="${BACKEND_URL}${song.cover_image_path}" class="w-10 h-10 rounded-md object-cover"/>
+      <div class="flex-1 text-white overflow-hidden">
+        <div class="font-medium text-sm truncate">${song.title}</div>
+        <div class="font-light text-xs truncate">${song.artist}</div>
+      </div>
+    `;
+    div.addEventListener('click', () => {
+      // Play song logic
+      playSong(song.audio_file_path);
+    });
+    mobileSearchResults.appendChild(div);
+  });
+
+  mobileSearchResults.classList.remove("hidden");
+}
 
 
 // ------------------- PLAY SONG & PLAYER BAR -------------------
