@@ -223,7 +223,7 @@ function displaySongsHeader(songs) {
 
     songs.forEach(song => {
         const songDiv = document.createElement('div');
-        songDiv.className = "music-container relative flex flex-col items-center gap-4 p-3 bg-white/5 rounded-lg cursor-pointer hover:bg-white/10 transition duration-300 group overflow-hidden shadow-lg";
+        songDiv.className = "music-container relative flex flex-col items-center gap-4 p-3 bg-white/5 rounded-2xl cursor-pointer hover:bg-white/10 transition duration-300 group overflow-hidden shadow-lg ";
 
 
         songDiv.innerHTML = `
@@ -280,7 +280,7 @@ songs.forEach((song) => {
 
     songDiv.className =
     //  i want glass like background
-      "music-container relative flex flex-col items-center gap-4 p-1 bg-white/10 backdrop-blur-lg px-4 rounded-2xl cursor-pointer hover:bg-white/20 transition duration-300 group overflow-hidden shadow-lg";
+      "music-container relative flex flex-col items-center gap-4 p-1  bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-white/10 backdrop-blur-lg px-4 rounded-2xl cursor-pointer hover:bg-gradient-to-br hover:from-slate-800/60 hover:to-slate-900/60 transition duration-300 group overflow-hidden shadow-lg";
 
     // Create inner HTML with a placeholder for duration
     songDiv.innerHTML = `
@@ -346,7 +346,7 @@ async function loadSongsHeader() {
 // ------------------- LOAD TRENDING -------------------
 async function loadTrendingSongs() {
     const token = localStorage.getItem('accessToken');
-    const res = await fetch(`${BACKEND_URL}api/v1/musics/get_random/7`, {
+    const res = await fetch(`${BACKEND_URL}api/v1/musics/get_random/6`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
     });
 
@@ -382,6 +382,26 @@ async function fetchUser() {
     usernameEL.textContent = user.username;
 }
 
+//  ------------------- FETCH OWNED ROOM COUNT -------------------
+
+const numOwnedRoom = document.getElementById("num-room-created-count");
+
+async function fetchOwnedRoomCount() {
+    const accessToken = localStorage.getItem('accessToken');
+
+    console.log("→ Fetching owned room count...");
+
+    const res = await fetch(`${BACKEND_URL}/rooms/owned-room-count`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${accessToken}` },
+    });
+
+    console.log("→ Status:", res.status);
+
+    const data = await res.json();
+
+    numOwnedRoom.textContent = data.owned_room_count;
+}
 
 // ------------------- HELPER -------------------
 function formatTime(seconds) {

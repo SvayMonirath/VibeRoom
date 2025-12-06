@@ -121,7 +121,6 @@ async function createRoom() {
     }
 }
 
-
 // ------------------ Handle Create Room Button ------------------
 const createRoomBtnDiv = document.getElementById('create-room-button');
 
@@ -155,7 +154,7 @@ updateCreateRoomButton();
 // ------------------ Room Cards ------------------
 function createRoomCard(room) {
     const roomDiv = document.createElement('div');
-    roomDiv.className = 'relative bg-gradient-to-br from-purple-600/10 to-pink-600/10 rounded-lg p-4 text-white mb-4 cursor-pointer border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.05]';
+    roomDiv.className = 'relative bg-gradient-to-br from-purple-600/10 to-pink-600/10 rounded-2xl px-8 py-2 text-white mb-4 cursor-pointer border border-purple-500/20 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.05]';
 
     roomDiv.innerHTML = `
         <h3 class="text-xl mb-2">${room.title}</h3>
